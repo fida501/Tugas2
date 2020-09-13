@@ -21,3 +21,25 @@ Route::get('/', function () {
 Route::get('test123', function(){
     return view('test123');
 });
+
+//Closure
+Route::get('/testclosure', function(){
+    return "closure work !!";
+})->name('closure');
+
+//route name
+Route::get('/testname', function(){
+    return route('closure');
+});
+
+//Parameter
+Route::get('/closure/{id}', function($id){
+    return $id;
+});
+
+//Controller
+Route::get('/testcontroller', "TestController@show"); 
+
+//Resource
+
+Route::resource('siswa', "SiswaController");
