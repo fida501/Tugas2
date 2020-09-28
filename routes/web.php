@@ -43,3 +43,14 @@ Route::get('/testcontroller', "TestController@show");
 //Resource
 
 Route::resource('siswa', "SiswaController");
+
+
+//home
+Route::get('/home', function(){
+    return view('home');
+});
+
+//about
+Route::get('/about', function(){
+    return view('about');
+});

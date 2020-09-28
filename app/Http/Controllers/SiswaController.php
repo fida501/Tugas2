@@ -25,6 +25,7 @@ class SiswaController extends Controller
     public function create()
     {
         //test
+        return "create ";
     }
 
     /**
