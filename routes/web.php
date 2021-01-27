@@ -46,7 +46,7 @@ Route::resource('siswa', "SiswaController");
 
 
 //home
-Route::get('/home', function(){
+Route::get('/home', function(){ 
     return view('home');
 });
 
@@ -54,3 +54,18 @@ Route::get('/home', function(){
 Route::get('/about', function(){
     return view('about');
 });
+//table
+Route::get('/table', function(){
+    return view('table');
+});
+//Register
+Route::get('/register','SiswaController@create');
+Route::post('/register','SiswaController@store');
+//table
+Route::get('/table', 'SiswaController@show')->name('showSiswa');
+//edit
+Route::get('/data/{id}/edit', 'SiswaController@edit')->name('editSiswa');
+//update
+Route::post('/data/{id}/update', 'SiswaController@update')->name('updateSiswa');
+//delete
+Route::get('/data/{id}/delete', 'SiswaController@destroy')->name('deleteSiswa');

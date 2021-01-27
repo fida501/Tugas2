@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Siswa;  
 
 class SiswaController extends Controller
 {
@@ -13,8 +14,7 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        return "index test";
-        //test
+        
     }
 
     /**
@@ -25,7 +25,8 @@ class SiswaController extends Controller
     public function create()
     {
         //test
-        return "create ";
+                return view('register');
+
     }
 
     /**
@@ -36,7 +37,9 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+         Siswa::create($request->all());
+         return redirect()->back();
     }
 
     /**
@@ -45,10 +48,13 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show()
+    {   
         //
-    }
+        $allsiswa = Siswa::all();
+        return view('table', compact('allsiswa'));
+        
+    }   
 
     /**
      * Show the form for editing the specified resource.
@@ -58,7 +64,9 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+        //edit
+        $siswa = Siswa::find($id);  
+        return view('editSiswa', compact('siswa'));
     }
 
     /**
@@ -69,8 +77,11 @@ class SiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    { 
         //
+        // Siswa::updateOrcreate(['id' => $id], $request->all());
+        Siswa::updateOrCreate(['id' => $id], $request->all());
+        return redirect(route('showSiswa'));
     }
 
     /**
@@ -81,6 +92,10 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //delete
+        $siswa = Siswa::find($id);
+        $siswa->delete();
+
+        return redirect(route('showSiswa'));
     }
 }
