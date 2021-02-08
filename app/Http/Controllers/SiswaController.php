@@ -37,6 +37,13 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validated = $request->validate([
+            'nama' => 'required',
+            'telpon' => 'required|numeric|digits:12',
+            'alamat' => 'required',
+
+        ]);
         // dd($request->all());
          Siswa::create($request->all());
          return redirect()->back();
