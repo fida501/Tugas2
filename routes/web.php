@@ -48,7 +48,7 @@ Route::resource('siswa', "SiswaController");
 //home
 Route::get('/home', function(){ 
     return view('home');
-});
+})->name('home');
 
 //about
 Route::get('/about', function(){
@@ -58,14 +58,24 @@ Route::get('/about', function(){
 Route::get('/table', function(){
     return view('table');
 });
+
+Route::get('/login', 'AuthController@login')->name('login');
+Route::post('/login', 'AuthController@postlogin')->name('postlogin');
+Route::get('/logout', 'AuthController@logout')->name('logout');
+
+Route::group(['middleware' => 'auth'], function(){
+
+
 //Register
-Route::get('/register','SiswaController@create');
+Route::get('/register','SiswaController@create')->middleware('auth');
 Route::post('/register','SiswaController@store');
 //table
-Route::get('/table', 'SiswaController@show')->name('showSiswa');
+Route::get('/table', 'SiswaController@show')->name('showSiswa')->middleware('auth');
 //edit
 Route::get('/data/{id}/edit', 'SiswaController@edit')->name('editSiswa');
 //update
 Route::post('/data/{id}/update', 'SiswaController@update')->name('updateSiswa');
 //delete
 Route::get('/data/{id}/delete', 'SiswaController@destroy')->name('deleteSiswa');
+
+});
